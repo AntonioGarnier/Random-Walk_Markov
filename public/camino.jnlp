@@ -2,7 +2,7 @@
 <jnlp
   spec="6.0+"
   codebase="https://antoniogarnier.github.io/Random-Walk_Markov/public"
-  href="tiro.jnlp">
+  href="camino.jnlp">
   <information>
     <title>Camino Aleatorio - Random-Walk Markov</title>
     <vendor>Antonio Garnier</vendor>
