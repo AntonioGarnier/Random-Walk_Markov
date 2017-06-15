@@ -6,6 +6,7 @@
 */
 
 
+import java.applet.Applet;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
@@ -18,11 +19,10 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-public class CaminoAleatorioControlador extends JFrame {
+public class CaminoAleatorioControlador extends Applet {
 
 	private static final long serialVersionUID = 1L;
 	private static final int DENSIDAD_POR_DEFECTO = 1000;					// Densidad por defecto del panel
-	private static final String TITULO_FRAME = "Camino Aleatorio";
 	private ArrayList<Botonera> almacenBotoneras = new ArrayList<Botonera> ();  // Almacen de todas las botoneras 
 	private JPanel botoneraPanel; 					// Panel donde se añaden los botones
 	private int caminoAnalizado;						// Índice para saber que camino estamos valorando
@@ -33,27 +33,46 @@ public class CaminoAleatorioControlador extends JFrame {
 	 * Constructor por defecto del controlador
 	 * @param numeroCaminos Define el numero de caminos que tendrá el programa
 	 */
-	public CaminoAleatorioControlador (int numeroCaminos) {
-		setNumeroCaminos(numeroCaminos);
+	public CaminoAleatorioControlador () {
+		numeroCaminos();
 		initFrame();				// Inicializamos el Frame
 		initPanelVista();			// Inicializamos el panel de Vista
 		initPanelBotones();		// Inicializamos el panel de botones
 		getAlmacenBotoneras().forEach(botones->initEscuchas(botones.getIndiceBotonera()));  // Para cada botonera, inicializamos los listener
+	
+	}
+	
+	public static void main(String[] args) {
+		JFrame frame = new JFrame ("Camino Aleatorio");
+		CaminoAleatorioControlador applet= new CaminoAleatorioControlador();
+		frame.add(applet, BorderLayout.CENTER);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		frame.setVisible(true);			
+	}
+	
+	public void numeroCaminos () {
+		try {
+			String miniFrame = JOptionPane.showInputDialog("Introduce el número de caminos a visualizar(Recomendado MAX 5)");
+			int numeroCaminos = Integer.parseInt(miniFrame);
+			setNumeroCaminos(numeroCaminos);
+		}
+		catch (NumberFormatException ex) {
+			JOptionPane.showMessageDialog(null, "Debes Introducir un valor entero", "VALOR ERRONEO", JOptionPane.ERROR_MESSAGE);
+			System.exit(0);
+		}
 	}
 
 	/**
 	 * Inicialización del frame, se inicializa la ventana maximizada
 	 */
 	public void initFrame ()	{
-		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		/*
 		Toolkit miPanel = Toolkit.getDefaultToolkit();
 		Dimension TamanioPanel = miPanel.getScreenSize();	
 		setSize (TamanioPanel.width/2, TamanioPanel.height/2);
 		*/		
 		setLayout(new BorderLayout());
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setTitle (getTituloFrame());
 	}
 	
 	/**
@@ -225,13 +244,6 @@ public class CaminoAleatorioControlador extends JFrame {
 	 */
 	public void setBotoneraPanel(JPanel botoneraPanel) {
 		this.botoneraPanel = botoneraPanel;
-	}
-
-	/**
-	 * @return the tituloFrame
-	 */
-	public static String getTituloFrame() {
-		return TITULO_FRAME;
 	}
 
 	/**

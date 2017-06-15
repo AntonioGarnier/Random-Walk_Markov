@@ -16,7 +16,7 @@
   </resources>
   <application-desc
        name="Camino Aleatorio"
-       main-class="Principal">
+       main-class="CaminoAleatorioControlador">
    </application-desc>
    <update check="background"/>
 </jnlp>
