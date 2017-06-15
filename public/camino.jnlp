@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp
+  spec="6.0+"
+  codebase="https://antoniogarnier.github.io/Random-Walk_Markov/public"
+  href="tiro.jnlp">
+  <information>
+    <title>Camino Aleatorio - Random-Walk Markov</title>
+    <vendor>Antonio Garnier</vendor>
+  </information>
+  <resources>
+      <!-- Application Resources -->
+      <j2se version="1.7+"
+            href="http://java.sun.com/products/autodl/j2se"/>
+      <jar href="caminoAleatorio.jar" main="true" />
+
+  </resources>
+  <application-desc
+       name="Camino Aleatorio"
+       main-class="Principal">
+   </application-desc>
+   <update check="background"/>
+</jnlp>
